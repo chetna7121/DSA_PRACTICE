@@ -60,10 +60,10 @@ class Solution
         if (p != NULL) {
             head->next = reverse(p, k);
         }
-        
-        return q;
+         head=q;
+         return head;
     }
-
+    
 };
 
 
