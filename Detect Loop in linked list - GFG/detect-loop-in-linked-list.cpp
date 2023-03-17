@@ -47,20 +47,21 @@ class Solution
     public:
     //Function to check if the linked list has a loop.
     bool detectLoop(Node* head)
-    {
-      unordered_set<Node*> set;
-      while(head)
-      {
-          if (set.find(head)!=set.end())
-      
-      return true;
-      set.insert(head);
-      head=head->next;
-      
+
+       {
+    Node* slow = head;
+    Node* fast = head;
+ 
+    while (slow && fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+        if (slow == fast) {
+            return true;
+        }
     }
     return false;
-    }
-    
+}
+
 
 };
 
