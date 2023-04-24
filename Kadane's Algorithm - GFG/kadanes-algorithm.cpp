@@ -14,10 +14,11 @@ class Solution{
  
     for (int i = 0; i < n ; i++) {
         maxsum = maxsum + arr[i];
+    
         if (currsum < maxsum)
            currsum = maxsum;
- 
-        if (maxsum < 0)
+            
+       if (maxsum < 0)
             maxsum = 0;
     }
     return currsum;
