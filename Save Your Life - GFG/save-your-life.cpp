@@ -7,41 +7,64 @@ using namespace std;
 // } Driver Code Ends
 //User function Template for C++
 
-class Solution{
+
+class Solution {
 public:
-  
-string maxSum(string W, char X[], int B[], int N) {
-    int n = W.size();
-    unordered_map<char, int> map;
-    for (int i = 0; i < N; i++) {
-        map[X[i]] = B[i];
-    }
-    vector<int> val(n);
-    for (int i = 0; i < n; i++) {
-        char c = W[i];
-        if (map.count(c)) {
-            val[i] = map[c];
-        } else {
-            val[i] = (int)c;
+    string maxSum(string w, char x[], int b[], int n) {
+        std::unordered_map<char, int> map;
+        for (int i = 0; i < n; i++) {
+            map[x[i]] = b[i];
         }
-    }
-    int max_sum = INT_MIN, curr_sum = 0;
-    int start= -1, end = -1, curr_start = 0;
-    for (int i = 0; i < n; i++) {
-        curr_sum += val[i];
-        if (curr_sum > max_sum) {
-            max_sum = curr_sum;
-            start = curr_start;
-            end = i;
+        int maxsum = INT_MIN, currsum = 0;
+        std::string s = "", temp = "";
+
+        for (int i = 0; i < w.size(); i++) {
+            int ascii;
+            if (map.find(w[i]) != map.end()) {
+                ascii = map[w[i]];
+            } else {
+                ascii = (int) w[i];
+            }
+
+            currsum += ascii;
+            temp += w[i];
+            if (maxsum < currsum) { 
+                maxsum = currsum;
+                s = temp;
+            }
+            if (currsum < 0) {  
+                currsum = 0;
+                temp = "";
+            }
         }
-        if (curr_sum < 0) {
-            curr_sum = 0;
-            curr_start = i + 1;
-        }
+
+        return s; 
     }
-    return W.substr(start, end - start + 1);
-}
 };
+
+          // Create a dictionary to store redefined ascii alues
+       /* unordered_map<char, int> ascii_dict;
+        for (int i = 0; i < n; i++) {
+            ascii_dict[x[i]] = b[i];
+        }
+        int maxsum = 0;
+        std::string max_substring;
+
+        // Brute force approach
+         for (int i = 0; i < w.size(); i++) {
+            for (int j = i; j < w.size(); j++) {
+                int sum = 0;
+                for (int k = i; k <= j; k++) {
+                    sum += ascii_dict[w[k]];
+                }
+                if (sum > maxsum) {
+                    maxsum = sum;
+                    max_substring = w.substr(i, j - i + 1);
+                }
+            }
+        }
+        return max_substring;
+    }*/
 
 
 //{ Driver Code Starts.
