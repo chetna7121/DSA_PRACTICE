@@ -4,7 +4,7 @@ public:
         int first = 0; 
         int second = 0;  
 
-        while (first < s.length() && second < t.length()) {
+        while (second < t.length()) {
             if (s[first] != t[second]) {
                 second++;
             } else if (s[first] == t[second]) {
@@ -13,6 +13,10 @@ public:
             }
         }
 
-        return first == s.length();
+ if (first == s.length()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 };
