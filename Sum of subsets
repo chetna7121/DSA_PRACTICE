@@ -1,0 +1,19 @@
+class Solution {
+public:
+    void generateSubsetSums(const std::vector<int>& arr, int index, int currentSum, std::vector<int>& subsetSums) {
+        // Base case: Add the current sum to the result
+        subsetSums.push_back(currentSum);
+
+        // Explore including the current element at index
+        for (int i = index; i < arr.size(); ++i) {
+            generateSubsetSums(arr, i + 1, currentSum + arr[i], subsetSums);  // Recursive call with the next index and updated sum
+        }
+    }
+
+    vector<int> subsetSums(vector<int> arr, int N) {
+        std::vector<int> result;
+        generateSubsetSums(arr, 0, 0, result);
+        return result;
+    }
+
+};
