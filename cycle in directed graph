@@ -1,0 +1,35 @@
+class Solution {
+  public:
+    bool dfs(int node, vector<int> adj[], vector<int>& visited, vector<int>& recursionStack) {
+        visited[node] = 1;
+        recursionStack[node] = 1;
+
+        for (auto it : adj[node]) {
+            if (!visited[it]) {
+                if (dfs(it, adj, visited, recursionStack)) {
+                    return true;
+                }
+            } else if (recursionStack[it]) {// for self loop
+                return true;  // Cycle detected
+            }
+        }
+
+        recursionStack[node] = 0; // Backtrack when recursion is done
+        return false;  // No cycle detected 
+    }
+
+    bool isCyclic(int V, vector<int> adj[]) {
+        vector<int> visited(V, 0);
+        vector<int> recursionStack(V, 0);
+
+        for (int i = 0; i < V; ++i) { // checking the cycle from each individual nodes
+            if (!visited[i] && dfs(i, adj, visited, recursionStack)) {
+                return true;  // Cycle detected
+            }
+        }
+
+        return false;  // No cycle detected in the entire graph
+    }
+
+    
+};
