@@ -1,0 +1,40 @@
+class Solution {
+     
+        //recursion
+         //fun(ds, map/array)
+         //loop from o-n-1
+         //if(i!=map) take into ds and putin ds.add(a[i]), map[i]=1
+         //and now func(ds,map) again for elemnt 2
+        //tc=n!, sc=o(n)+o(n) 
+        void recursionP(vector<int>& arr, int n, vector<int>& ds, vector<vector<int>>& ans, vector<bool>& freq) {
+        if(ds.size() == n) {
+            ans.push_back(ds);
+            return;
+        }
+        
+        for(int i = 0; i < n; ++i) {
+            // Skip over duplicate elements
+            if(freq[i] || (i > 0 && arr[i] == arr[i - 1] && !freq[i - 1])) 
+                continue;
+            
+            freq[i] = true;
+            ds.push_back(arr[i]);
+            recursionP(arr, n, ds, ans, freq);
+            ds.pop_back();
+            freq[i] = false;
+        }
+    }
+
+public:
+    vector<vector<int>> uniquePerms(vector<int>& arr, int n) {
+        vector<vector<int>> ans;
+        vector<int> ds;
+        vector<bool> freq(n, false);
+        
+        sort(arr.begin(), arr.end());
+        
+        recursionP(arr, n, ds, ans, freq);
+        
+        return ans;
+    }   
+    };
