@@ -1,0 +1,22 @@
+class Solution {
+public:
+      void getLeafValues(TreeNode* root, vector<int>& leafVal) {
+        if (root == nullptr)
+         return;
+        //main logic 
+        if (root->left == nullptr && root->right == nullptr) {
+            leafVal.push_back(root->val);
+            return;
+        }
+        //dfs
+        getLeafValues(root->left, leafVal);
+        getLeafValues(root->right, leafVal);
+    }
+    bool leafSimilar(TreeNode* root1, TreeNode* root2) {
+      vector<int> leafVal1, leafVal2;
+        
+        getLeafValues(root1, leafVal1);
+        getLeafValues(root2, leafVal2);
+        return leafVal1 == leafVal2;
+    }
+};
