@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+         
+      //maxheap this will sort it and pops all the pairs that are greater than k
+     priority_queue<pair<int, pair<int,int>>> maxp;
+        
+        for (int i = 0; i < points.size(); i++) {
+            int x = points[i][0];
+            int y = points[i][1];
+            int distance = x * x + y * y;
+            maxp.push({distance, {x, y}});
+            if (maxp.size() > k) {
+                maxp.pop();
+            }
+        }
+        
+        vector<vector<int>> result;
+        while (!maxp.empty()) {
+            pair<int, pair<int,int>> p = maxp.top();
+            result.push_back({p.second.first, p.second.second});
+            maxp.pop();
+        }
+        
+        return result;
+    }
+};
