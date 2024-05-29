@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+unordered_map<char, int>mp_count;
+for( char ch : magazine)
+{
+    mp_count[ch]++;
+    //ex=aab= a=2, b=1 stores count for each character in magazine
+}
+ for(char ch : ransomNote)
+{
+    if( mp_count[ch]==0){
+    //if count of ch in magazine is 0 than false else decrease count in magazine and process the current ch of ransomNote
+    // magazine=aab
+    //ransomNote=aa and count of (RansomNote'a') in magazine is 2 then decrease the count of a in magazine now process 2nd char of ransomNote that is a again note count is 1 in magazine now decrease again till all the values of ransomNote are processed, once done return true. 
+    return false;
+}
+    mp_count[ch]--;
+}
+return true;
+    }
+};
