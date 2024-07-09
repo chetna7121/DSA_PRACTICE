@@ -1,0 +1,50 @@
+class Solution {
+public:
+
+/*VALID ANAGRAM
+Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+Example 1:
+
+Input: s = "anagram", t = "nagaram"
+Output: true
+Example 2:
+Input: s = "rat", t = "car"
+Output: false
+ 
+Constraints:
+1 <= s.length, t.length <= 5 * 104
+s and t consist of lowercase English letters.
+ */
+
+
+    bool isAnagram(string s, string t) {
+        unordered_map<char, int> mp1;
+        unordered_map<char, int>mp2;
+        //base condition
+        
+        if(s.length()!=t.length())
+        {
+            return false;
+        }
+        for(int i=0;i<s.length();i++)
+        {
+            mp1[s[i]]++;
+        }
+        for(int i=0;i<t.length();i++)
+        {
+            mp2[t[i]]++;
+        }
+
+       for(int i=0;i<s.length();i++)
+       {
+       char char1=s[i];
+      // if( mp1[char1]!=mp2[char1])//mp[char1]=stores the count of char1 that is a in both map
+       {
+         return false;
+       }
+       }
+       return true;
+    }
+};
